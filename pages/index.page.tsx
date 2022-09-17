@@ -2,6 +2,8 @@ import type {NextPage} from 'next'
 import Head from 'next/head'
 import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 
+
+
 const Index: NextPage = () => {
     return (
         <>
@@ -12,6 +14,7 @@ const Index: NextPage = () => {
             </Head>
 
             <BodySingle title={"Sample"}>
+                <h1>hola</h1>
             </BodySingle>
         </>
     )
