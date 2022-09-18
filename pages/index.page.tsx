@@ -1,6 +1,9 @@
 import type {NextPage} from 'next'
 import Head from 'next/head'
 import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
+import GridMarvel from 'dh-marvel/components/grid-marvel';
+
+
 
 
 
@@ -15,6 +18,8 @@ const Index: NextPage = () => {
 
             <BodySingle title={"Sample"}>
                 <h1>hola</h1>
+            <GridMarvel />
+            
             </BodySingle>
         </>
     )
