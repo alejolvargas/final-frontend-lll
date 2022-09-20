@@ -1,13 +1,22 @@
-import type {NextPage} from 'next'
+import type {GetStaticProps, NextPage} from 'next'
 import Head from 'next/head'
 import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 import GridMarvel from 'dh-marvel/components/grid-marvel';
+import { getComics } from 'dh-marvel/services/marvel/marvel.service';
+import { ComicType } from 'dh-marvel/features/checkout/postComic.types';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import { useState } from 'react';
+
+
+type postProps = {
+    comics: ComicType[],
+}
 
 
 
-
-
-const Index: NextPage = () => {
+const Index: NextPage<postProps> = ({comics}:postProps) => {
+   const [data, setData]= useState<ComicType[]>(comics)
     return (
         <>
             <Head>
@@ -18,11 +27,27 @@ const Index: NextPage = () => {
 
             <BodySingle title={"Sample"}>
                 <h1>hola</h1>
-            <GridMarvel />
-            
+                <GridMarvel comics={data}/>
+                <Stack spacing={2}>
+               
+                       
+                   <Pagination count={10} variant="outlined" shape="rounded" />
+                </Stack>
             </BodySingle>
         </>
     )
 }
+
+export const getStaticProps:GetStaticProps  = async() => {
+    const posts = await getComics(0,12)
+
+    
+    return {
+        props: {comics: posts.data.results}
+
+    }
+} 
+
+
 
 export default Index

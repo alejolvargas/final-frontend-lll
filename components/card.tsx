@@ -5,28 +5,36 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { useRouter } from 'next/router';
 
-const CardMarvel = () => {
+type comicCardProps = {
+    id: number,
+    title: string,
+    picture: string,
+}
+
+const CardMarvel = ({title, picture, id}:comicCardProps) => {
+  const router = useRouter()
+  const ToDetail = () => {
+    router.push(`/comic/${id}`)
+  }
+
   return (
      <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
-        alt="green iguana"
-        height="140"
-        image="/static/images/cards/contemplative-reptile.jpg"
+        alt={title}
+        height="400"
+        image={picture}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-         Prueba
+        {title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
-      </CardContent>
+        </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Button size="small">Comprar</Button>
+        <Button size="small" onClick={ToDetail}> Ver detalle</Button>
       </CardActions>
     </Card>
   )
