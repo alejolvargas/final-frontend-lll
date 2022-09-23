@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import CardMarvel from './card'
-import { ComicType } from 'dh-marvel/features/checkout/postComic.types';
+import { ComicType } from 'dh-marvel/features/types/postComic.types';
 
 interface Props {
     comics: ComicType[]

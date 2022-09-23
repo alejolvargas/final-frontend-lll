@@ -42,3 +42,9 @@ export const getCharacter = async (characterId: number) => {
     if (results.length > 0) return results[0];
     else return null;
 }
+export const getCharacters = async (offset?: number, limit?: number) => {
+    const params = new URLSearchParams();
+    if (offset) params.set("offset", `${offset}`);
+    if (limit) params.set("limit", `${limit}`);
+    return fetchApi("characters", params.toString());
+}
