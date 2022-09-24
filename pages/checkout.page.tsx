@@ -142,7 +142,7 @@ export default function HorizontalNonLinearStepper() {
                     </Grid>
                     <Grid item xs={4}>
                         <Item>
-                            <Card sx={100}>
+                            <Card >
                                 <CardMedia
 
 

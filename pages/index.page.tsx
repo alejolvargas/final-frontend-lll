@@ -12,28 +12,31 @@ import LayoutGeneral from 'dh-marvel/components/layouts/layout-general';
 type postProps = {
     comics: ComicType[],
     total: number
-  
+
 }
 
 
 
-const Index: NextPage<postProps> = ({ comics, total}: postProps) => {
+const Index: NextPage<postProps> = ({ comics, total }: postProps) => {
     const [data, setData] = useState<ComicType[]>(comics)
     const [page, setPage] = useState(1);
-    const limit = 12;
+   
 
     const handleChange = async (e: React.ChangeEvent<unknown>, value: number) => {
 
         setPage(value);
-        console.log(value)
+       
     };
 
     const getComicsPage = async () => {
-        const offset = limit*(page - 1);
-        const response = await fetch(`/api/comics?offset=${offset}`)
+        /* offset : Omita el número especificado de recursos en el conjunto de resultados. */
+        const offset = 12 * (page - 1);
+        console.log(`el vaor de offset es ${offset}`)
+        const response = await fetch(`/api/paginacion/comics?offset=${offset}`)
         const results = await response.json()
         setData(results)
-        
+        console.log(setData)
+
     }
 
     useEffect(() => {
@@ -78,3 +81,5 @@ export const getStaticProps: GetStaticProps = async () => {
 
 
 export default Index
+
+
