@@ -26,7 +26,7 @@ const Fag: NextPage<faqsProps> = ({faqsData}:faqsProps) => {
 
             <BodySingle title={"Preguntas Frecuentes"}>
                 {faqsData.map((faq:FaqsType)=>
-                      <Accordion>
+                      <Accordion key={faq.id}>
                           <AccordionSummary
                              expandIcon={<ExpandMoreIcon />}
                              aria-controls="panel1a-content"
