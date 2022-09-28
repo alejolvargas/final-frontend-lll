@@ -9,17 +9,19 @@ import ControlledTextInput from '../imputText/ControlledTextInput';
 import Stack from '@mui/material/Stack';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from 'next/router';
+import useOrder from 'context/useOrden';
+import { setSnackbar, submitCard, submitForm } from 'context/action';
 
 
 type paymentFormProps = {
     title: string,
     activeStep: number,
-    step: string[],
+    steps: string[],
     handleNext: () => void,
     handleBack: () => void,
 }
 
-const paymentForm: FC<paymentFormProps> = ({ title, activeStep, step, handleNext, handleBack }: paymentFormProps) => {
+const paymentForm: FC<paymentFormProps> = ({ title, activeStep, steps, handleNext, handleBack }: paymentFormProps) => {
 
     const router = useRouter();
     const { state: { order: { card: { nroTarjeta, nombreTarjeta, fechaExp, codSeguridad } } }, dispatch, state } = useOrder();
@@ -54,11 +56,11 @@ const paymentForm: FC<paymentFormProps> = ({ title, activeStep, step, handleNext
                 lastname: state.order.register.apellido,
                 email: state.order.register.email,
                 address: {
-                    address1: state.order.delivery.direccion,
-                    address2: state.order.delivery.departamento,
-                    city: state.order.delivery.ciudad,
-                    state: state.order.delivery.provincia,
-                    zipCode: state.order.delivery.codigoPostal,
+                    address1: state.order.address.direccion,
+                    address2: state.order.address.departamento,
+                    city: state.order.address.ciudad,
+                    state: state.order.address.provincia,
+                    zipCode: state.order.address.codigoPostal,
                 }
             }
         };
@@ -105,7 +107,7 @@ const paymentForm: FC<paymentFormProps> = ({ title, activeStep, step, handleNext
                     </Button>
                     <Box sx={{ flex: '1 1 auto' }} />
                     <Button type="submit">
-                        {activeStep === step.length - 1 ? 'Finalizar' : 'Proximo'}
+                        {activeStep === steps.length - 1 ? 'Finalizar' : 'Proximo'}
                     </Button>
                 </Box>
             </form>

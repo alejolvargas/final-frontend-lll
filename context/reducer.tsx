@@ -1,11 +1,11 @@
 import { OrderState } from 'context';
-import { address, Card, CheckoutInput, ComicInfo, RegisterFormData } from 'dh-marvel/features/checkout/checkout.types';
+import { Address, Card, CheckoutInput, ComicInfo, RegisterFormData } from 'dh-marvel/features/checkout/checkout.types';
 
 
 export type Action =
     | { type: 'ADD_COMIC', payload: ComicInfo }
     | { type: 'SUBMIT_REGISTER', payload: RegisterFormData }
-    | { type: 'SUBMIT_ADDRESS', payload: address }
+    | { type: 'SUBMIT_ADDRESS', payload: Address }
     | { type: 'SUBMIT_CARD', payload: Card }
     | { type: 'SUBMIT_FORM' }
     | { type: 'RESTORE_STATE' }
@@ -23,7 +23,7 @@ export const initialState: OrderState = {
             apellido: "Stark",
             email: "Tony@stark.com",
         },
-        delivery: {
+        address: {
             direccion: "Avengers Tower",
             departamento: "20 A",
             ciudad: "New York",

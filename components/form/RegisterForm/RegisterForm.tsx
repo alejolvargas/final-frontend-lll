@@ -16,12 +16,12 @@ import { submitRegister } from 'context/action';
 type RegisterFormProps = {
     title: string,
     activeStep: number,
-    step: string[],
+    steps: string[],
     handleNext: () => void,
     handleBack: () => void,
 }
 
-const RegisterForm: FC<RegisterFormProps> = ({ title, activeStep, step, handleNext, handleBack }: RegisterFormProps) => {
+const RegisterForm: FC<RegisterFormProps> = ({ title, activeStep, steps, handleNext, handleBack }: RegisterFormProps) => {
 
     const methods = useForm<RegisterFormData>({
         resolver: yupResolver(registerSchema),
@@ -66,7 +66,7 @@ const RegisterForm: FC<RegisterFormProps> = ({ title, activeStep, step, handleNe
               </Button>
               <Box sx={{ flex: '1 1 auto' }} />
               <Button type="submit">
-                  {activeStep === step.length - 1 ? 'Finalizar' : 'Proximo'}
+                  {activeStep === steps.length - 1 ? 'Finalizar' : 'Proximo'}
               </Button>
           </Box>
      </FormProvider>

@@ -7,21 +7,23 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ControlledTextInput from '../imputText/ControlledTextInput';
 import Stack from '@mui/material/Stack';
-import { address } from 'dh-marvel/features/checkout/checkout.types';
+import { Address } from 'dh-marvel/features/checkout/checkout.types';
+import useOrder from 'context/useOrden';
+import { submitAddress } from 'context/action';
 
 
 type addressFormProps = {
     title: string,
     activeStep: number,
-    step: string[],
+    steps: string[],
     handleNext: () => void,
     handleBack: () => void,
 }
 
-const addressForm: FC<addressFormProps> = ({ title, activeStep, step, handleNext, handleBack }: addressFormProps) => {
+const addressForm: FC<addressFormProps> = ({ title, activeStep, steps, handleNext, handleBack }: addressFormProps) => {
     const { state: { order: { address: { direccion, departamento, ciudad, provincia, codigoPostal } } }, dispatch } = useOrder();
 
-    const methods = useForm<address>({
+    const methods = useForm<Address>({
         resolver: yupResolver(addressSchema),
         defaultValues: {
             direccion,
@@ -34,7 +36,7 @@ const addressForm: FC<addressFormProps> = ({ title, activeStep, step, handleNext
 
     const { setFocus, handleSubmit } = methods;
 
-    const onSubmit = (data: address) => {
+    const onSubmit = (data: Address) => {
         submitAddress(dispatch, data);
         handleNext();
     }
@@ -65,7 +67,7 @@ const addressForm: FC<addressFormProps> = ({ title, activeStep, step, handleNext
                     </Button>
                     <Box sx={{ flex: '1 1 auto' }} />
                     <Button type="submit">
-                        {activeStep === step.length - 1 ? 'Finalizar' : 'Proximo'}
+                        {activeStep === steps.length - 1 ? 'Finalizar' : 'Proximo'}
                     </Button>
                 </Box>
             </form>

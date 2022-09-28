@@ -36,7 +36,7 @@ export type RegisterFormData = {
     email: string,
 }
 
-export type address = {
+export type Address = {
     direccion: string,
     departamento: string,
     ciudad: string,
@@ -54,14 +54,14 @@ export type Card = {
 export type Order = {
     comic: ComicInfo,
     register: RegisterFormData,
-    delivery: address,
+    address: Address,
     card: Card,
 }
 
 export type FinishedOrder = {
     comic: ComicInfo,
     comprador: RegisterFormData,
-    direccion: address,
+    direccion: Address,
 }
 
 export type Snackbar = {

@@ -21,6 +21,8 @@ import Image from 'next/image'
 import AccordionCharactes from 'dh-marvel/components/accordin-characters';
 import LayoutGeneral from 'dh-marvel/components/layouts/layout-general';
 import { useRouter } from 'next/router';
+import useOrder from 'context/useOrden';
+import { selectComic } from 'context/action';
 
 type postProps = {
     comics: ComicType[],
@@ -35,13 +37,24 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const detailCard: NextPage<postProps> = ({ comics }: postProps) => {
+
+    const { state, dispatch } = useOrder();
     const router = useRouter();
+
+
     console.log(comics)
+
     const pruebaText = comics.description.length;
     const urlImage = `${comics.thumbnail.path}/portrait_incredible.${comics.thumbnail.extension}`;
+    const price = comics.price
+    const title = comics.title
+
+    console.log(price)
 
     console.log(urlImage);
     const handleButton = () => {
+        const comic = { img: urlImage, price, title }
+        selectComic(dispatch, comic)
         router.push("/checkout")
     }
 

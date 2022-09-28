@@ -1,4 +1,4 @@
-import { address, Card, ComicInfo, RegisterFormData } from 'dh-marvel/features/checkout/checkout.types';
+import { Address, Card, ComicInfo, RegisterFormData } from 'dh-marvel/features/checkout/checkout.types';
 import { Dispatch } from 'react';
 import { Action } from './reducer';
 
@@ -11,7 +11,7 @@ export const submitRegister = (dispatch: Dispatch<Action>, register: RegisterFor
     dispatch({ type: 'SUBMIT_REGISTER', payload: register });
 }
 
-export const submitAddress = (dispatch: Dispatch<Action>, address: address) => {
+export const submitAddress = (dispatch: Dispatch<Action>, address: Address) => {
     dispatch({ type: 'SUBMIT_ADDRESS', payload: address });
 }
 
