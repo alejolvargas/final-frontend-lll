@@ -23,3 +23,48 @@ export type CheckoutInput = {
         price: number;
     }
 }
+
+export type ComicInfo = {
+    img: string,
+    price: number,
+    title: string,
+}
+
+export type RegisterFormData = {
+    nombre:string
+    apellido: string,
+    email: string,
+}
+
+export type address = {
+    direccion: string,
+    departamento: string,
+    ciudad: string,
+    provincia: string,
+    codigoPostal: string,
+}
+
+export type Card = {
+    nroTarjeta: string,
+    nombreTarjeta: string,
+    fechaExp: string,
+    codSeguridad: string,
+}
+
+export type Order = {
+    comic: ComicInfo,
+    register: RegisterFormData,
+    delivery: address,
+    card: Card,
+}
+
+export type FinishedOrder = {
+    comic: ComicInfo,
+    comprador: RegisterFormData,
+    direccion: address,
+}
+
+export type Snackbar = {
+    open: boolean,
+    message: string,
+}
