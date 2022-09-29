@@ -46,29 +46,31 @@ const RegisterForm: FC<RegisterFormProps> = ({ title, activeStep, steps, handleN
     }, []);
 
   return ( 
+
      <FormProvider {...methods}>
-      <Stack>
           <form onSubmit={handleSubmit(onSubmit)}>
              <h4>{title}</h4>
-             <ControlledTextInput name="nombre" label="nombre" />
-             <ControlledTextInput name="apellido" label="apellido" />
-             <ControlledTextInput name="email" label="email" />
+            <Stack>
+                    <ControlledTextInput name="nombre" label="nombre" />
+                    <ControlledTextInput name="apellido" label="apellido" />
+                    <ControlledTextInput name="email" label="email@.com" />
+            
+            </Stack> 
+            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                <Button
+                    color="inherit"
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                    sx={{ mr: 1 }}
+                >
+                    Anterior
+                </Button>
+                <Box sx={{ flex: '1 1 auto' }} />
+                <Button type="submit">
+                    {activeStep === steps.length - 1 ? 'Finalizar' : 'Proximo'}
+                </Button>
+            </Box>
           </form>
-      </Stack> 
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-              <Button
-                  color="inherit"
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  sx={{ mr: 1 }}
-              >
-                  Anterior
-              </Button>
-              <Box sx={{ flex: '1 1 auto' }} />
-              <Button type="submit">
-                  {activeStep === steps.length - 1 ? 'Finalizar' : 'Proximo'}
-              </Button>
-          </Box>
      </FormProvider>
   )
 }

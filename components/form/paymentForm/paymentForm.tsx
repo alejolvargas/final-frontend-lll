@@ -21,7 +21,7 @@ type paymentFormProps = {
     handleBack: () => void,
 }
 
-const paymentForm: FC<paymentFormProps> = ({ title, activeStep, steps, handleNext, handleBack }: paymentFormProps) => {
+const PaymentForm: FC<paymentFormProps> = ({ title, activeStep, steps, handleNext, handleBack }: paymentFormProps) => {
 
     const router = useRouter();
     const { state: { order: { card: { nroTarjeta, nombreTarjeta, fechaExp, codSeguridad } } }, dispatch, state } = useOrder();
@@ -115,4 +115,4 @@ const paymentForm: FC<paymentFormProps> = ({ title, activeStep, steps, handleNex
     )
 }
 
-export default paymentForm
+export default PaymentForm

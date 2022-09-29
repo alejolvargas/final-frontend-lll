@@ -20,7 +20,7 @@ type addressFormProps = {
     handleBack: () => void,
 }
 
-const addressForm: FC<addressFormProps> = ({ title, activeStep, steps, handleNext, handleBack }: addressFormProps) => {
+const AddressForm: FC<addressFormProps> = ({ title, activeStep, steps, handleNext, handleBack }: addressFormProps) => {
     const { state: { order: { address: { direccion, departamento, ciudad, provincia, codigoPostal } } }, dispatch } = useOrder();
 
     const methods = useForm<Address>({
@@ -75,4 +75,4 @@ const addressForm: FC<addressFormProps> = ({ title, activeStep, steps, handleNex
     )
 }
 
-export default addressForm
+export default AddressForm

@@ -2,6 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
 import StepButton from '@mui/material/StepButton';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -18,6 +19,9 @@ import { useRouter } from 'next/router';
 import useOrder from 'context/useOrden';
 import { setSnackbar } from 'context/action';
 import { useEffect } from 'react';
+import RegisterForm from 'dh-marvel/components/form/RegisterForm/RegisterForm';
+import AddressForm from 'dh-marvel/components/form/addressForm/addressForm';
+import PaymentForm from 'dh-marvel/components/form/paymentForm/paymentForm';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -65,10 +69,40 @@ const Checkout: NextPage = () => {
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2}>
                     <Grid item xs={8}>
-                        <Item>
-                           <h2>hola</h2>
-                        </Item>
+                        <Box sx={{ width: '100%' }}>
+                            <Stepper activeStep={activeStep}>
+                                {steps.map((label, index) => {
+                                    const stepProps: { completed?: boolean } = {};
+                                    const labelProps: {
+                                        optional?: React.ReactNode;
+                                    } = {};
+                             
+                                    return (
+                                        <Step key={label} {...stepProps}>
+                                            <StepLabel {...labelProps}>{label}</StepLabel>
+                                        </Step>
+                                    );
+                                })}
+                            </Stepper>
+                            
+                            
+                            
+                            
+                                { activeStep === 0 &&
+                                <RegisterForm title={steps[activeStep]} activeStep={activeStep} steps={steps} handleBack={handleBack} handleNext={handleNext} />
+                                }
+                                {activeStep === 1 &&
+                                <AddressForm title={steps[activeStep]} activeStep={activeStep} steps={steps} handleBack={handleBack} handleNext={handleNext} />
+                                }
+                                {activeStep === 2 &&
+                                <PaymentForm title={steps[activeStep]} activeStep={activeStep} steps={steps} handleBack={handleBack} handleNext={handleNext} />
+                                } 
+                            
+                              
+                           
+                        </Box>
                     </Grid>
+            
                     <Grid item xs={4}>
                         <Item>
                             <Card >
@@ -86,6 +120,7 @@ const Checkout: NextPage = () => {
                                     <Typography variant="body1">
                                                             {price}
                                     </Typography>
+                                    
                                 </CardContent>
                             </Card>
                         </Item>
@@ -99,3 +134,15 @@ const Checkout: NextPage = () => {
 
 
 export default Checkout;
+
+
+
+/*     {activeStep === 0 &&
+                                               <RegisterForm title={steps[activeStep]} activeStep={activeStep} steps={steps} handleBack={handleBack} handleNext={handleNext} />
+                                           }
+                                           {activeStep === 1 &&
+                                               <AddressForm title={steps[activeStep]} activeStep={activeStep} steps={steps} handleBack={handleBack} handleNext={handleNext} />
+                                           }
+                                           {activeStep === 2 &&
+                                               <PaymentForm title={steps[activeStep]} activeStep={activeStep} steps={steps} handleBack={handleBack} handleNext={handleNext} />
+                                           } */
