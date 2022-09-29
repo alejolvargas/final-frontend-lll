@@ -22,19 +22,19 @@ type RegisterFormProps = {
 }
 
 const RegisterForm: FC<RegisterFormProps> = ({ title, activeStep, steps, handleNext, handleBack }: RegisterFormProps) => {
+    const { state: { order: { register: { nombre, apellido, email } } }, dispatch } = useOrder();
 
     const methods = useForm<RegisterFormData>({
         resolver: yupResolver(registerSchema),
         defaultValues: {
-            nombre: "nombre",
-            apellido: "apellido",
-            email: "email",
+            nombre: nombre,
+            apellido: apellido,
+            email: email,
         }
     
     })
     const { setFocus, handleSubmit } = methods;
 
-    const { state: { order: { register: { nombre, apellido, email } } }, dispatch } = useOrder();
 
     const onSubmit = (data: RegisterFormData) => {
         submitRegister(dispatch, data);
