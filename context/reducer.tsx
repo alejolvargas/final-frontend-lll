@@ -24,7 +24,7 @@ export const initialState: OrderState = {
             email: "as@gmail.com",
         },
         address: {
-            direccion: "calle 123",
+            direccion: "calle falsa 123",
             departamento: "bogota",
             ciudad: "bogota",
             provincia: "bogota",

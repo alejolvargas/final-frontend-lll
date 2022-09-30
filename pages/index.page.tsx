@@ -52,8 +52,7 @@ const Index: NextPage<postProps> = ({ comics, total }: postProps) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <BodySingle title={"Sample"}>
-                <h1>hola</h1>
+            <BodySingle title={"MARVEL"}>
                 <Stack spacing={2}>
                     <Pagination count={Math.round(total / 12)} page={page} onChange={handleChange} hidePrevButton={page == 1 ? true : false} />
                 </Stack>
