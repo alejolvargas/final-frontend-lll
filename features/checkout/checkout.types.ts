@@ -58,7 +58,7 @@ export type Order = {
     card: Card,
 }
 
-export type FinishedOrder = {
+export type orderDetail = {
     comic: ComicInfo,
     comprador: RegisterFormData,
     direccion: Address,

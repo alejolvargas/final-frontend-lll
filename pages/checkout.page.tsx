@@ -22,6 +22,8 @@ import { useEffect } from 'react';
 import RegisterForm from 'dh-marvel/components/form/RegisterForm/RegisterForm';
 import AddressForm from 'dh-marvel/components/form/addressForm/addressForm';
 import PaymentForm from 'dh-marvel/components/form/paymentForm/paymentForm';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -32,7 +34,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 
-const steps = ['Datos personales', 'Dirección de entrega', 'Sección de pago'];
+const steps = ['Datos personales', 'Dirección de entrega', 'Datos de pago'];
 
 const Checkout: NextPage = () => {
 
@@ -47,10 +49,6 @@ const Checkout: NextPage = () => {
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-
-    const onSubmit = () => {
-        setActiveStep(0);
     };
 
     const handleClose = () => {
@@ -84,10 +82,6 @@ const Checkout: NextPage = () => {
                                     );
                                 })}
                             </Stepper>
-                            
-                            
-                            
-                            
                                 { activeStep === 0 &&
                                 <RegisterForm title={steps[activeStep]} activeStep={activeStep} steps={steps} handleBack={handleBack} handleNext={handleNext} />
                                 }
@@ -96,10 +90,7 @@ const Checkout: NextPage = () => {
                                 }
                                 {activeStep === 2 &&
                                 <PaymentForm title={steps[activeStep]} activeStep={activeStep} steps={steps} handleBack={handleBack} handleNext={handleNext} />
-                                } 
-                            
-                              
-                           
+                                }                             
                         </Box>
                     </Grid>
             
@@ -127,6 +118,13 @@ const Checkout: NextPage = () => {
                     </Grid>
 
                 </Grid>
+                <Snackbar
+                    open={open}
+                    autoHideDuration={6000}
+                    onClose={handleClose}
+                >
+                    <Alert severity='error'>{message}</Alert>
+                </Snackbar>
             </Box>
      </LayoutCheckout>
     );
@@ -137,12 +135,3 @@ export default Checkout;
 
 
 
-/*     {activeStep === 0 &&
-                                               <RegisterForm title={steps[activeStep]} activeStep={activeStep} steps={steps} handleBack={handleBack} handleNext={handleNext} />
-                                           }
-                                           {activeStep === 1 &&
-                                               <AddressForm title={steps[activeStep]} activeStep={activeStep} steps={steps} handleBack={handleBack} handleNext={handleNext} />
-                                           }
-                                           {activeStep === 2 &&
-                                               <PaymentForm title={steps[activeStep]} activeStep={activeStep} steps={steps} handleBack={handleBack} handleNext={handleNext} />
-                                           } */

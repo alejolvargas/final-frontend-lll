@@ -40,17 +40,6 @@ const PaymentForm: FC<paymentFormProps> = ({ title, activeStep, steps, handleNex
 
     const onSubmit = async (data: Card) => {
         const body: CheckoutInput = {
-            order: {
-                name: state.order.comic.title,
-                image: state.order.comic.img,
-                price: state.order.comic.price,
-            },
-            card: {
-                number: data.nroTarjeta,
-                nameOnCard: data.nombreTarjeta,
-                expDate: data.fechaExp,
-                cvc: data.codSeguridad,
-            },
             customer: {
                 name: state.order.register.nombre,
                 lastname: state.order.register.apellido,
@@ -62,39 +51,56 @@ const PaymentForm: FC<paymentFormProps> = ({ title, activeStep, steps, handleNex
                     state: state.order.address.provincia,
                     zipCode: state.order.address.codigoPostal,
                 }
+            },
+            card: {
+                number: data.nroTarjeta,
+                cvc: data.codSeguridad,
+                expDate: data.fechaExp,
+                nameOnCard: data.nombreTarjeta,
+            },
+            order: {
+                name: state.order.comic.title,
+                image: state.order.comic.img,
+                price: state.order.comic.price,
             }
-        };
+        }
+       
+        console.log(body)
         submitCard(dispatch, data);
         submitForm(dispatch)
-        const JSONbody = JSON.stringify(body)
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSONbody,
-        }
-        const response = await fetch("/api/checkout", options)
-        const result = await response.json()
-        if (result.error)
-            setSnackbar(dispatch, result.message);
+
+       
+
+        const response = await fetch("/api/checkout",{
+            method: "POST",
+            headers: { 'Content-Type': 'application/json', 'Accept-Type': 'application/json', },
+            body: JSON.stringify(body)
+        });
+        const res = await response.json();
+        console.log("POST res: " + JSON.stringify(res));
+        if (res.error)
+            setSnackbar(dispatch, res.message);
         else
             router.push("/confirmacion-compra")
     }
+   
 
     useEffect(() => {
         setFocus("nroTarjeta")
     }, [setFocus])
-
+ 
     return (
         <FormProvider {...methods} >
             <form onSubmit={handleSubmit(onSubmit)}>
                 <h4>{title}</h4>
                 <Stack >
-                    <ControlledTextInput name="nroTarjeta" label="Numero Tarjeta " defaultValue="" />
                     <ControlledTextInput name="nombreTarjeta" label="Nombre Tarjeta " defaultValue="" />
-                    <ControlledTextInput name="fechaExp" label="Fecha de expiración " defaultValue="" />
-                    <ControlledTextInput name="codSeguridad" label="Codigo de Seguridad " defaultValue="" type="password" />
+                    <ControlledTextInput name="nroTarjeta" label="Numero Tarjeta " defaultValue="" />
+                    <Stack direction="row" spacing={2}>
+                        <ControlledTextInput name="fechaExp" label="Fecha de expiración " defaultValue="" />
+                         <ControlledTextInput name="codSeguridad" label="Codigo de Seguridad " defaultValue="" type="password" />
+                    </Stack>
+                   
                 </Stack>
                 <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                     <Button

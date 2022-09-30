@@ -11,9 +11,9 @@ import {
 
 const serverError = 'error'
 export const invalidAddress = 'invalid'
-export const validCard = '4242 4242 4242 4242'.replace(" ", "");
-export const withoutFundsCard = '4111 4111 4111 4111'.replace(" ", "");
-export const withoutAuthorizationCard = '4000 4000 4000 4000'.replace(" ", "");
+export const validCard = '4242 4242 4242 4242';
+export const withoutFundsCard = '4111 4111 4111 4111';
+export const withoutAuthorizationCard = '4000 4000 4000 4000';
 
 type Data = {
     data: any;
@@ -25,6 +25,7 @@ type Data = {
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 
+    console.log(req.body)
     if (req.method !== "POST") {
         res.status(405).json(ERROR_METHOD_NOT_ALLOWED);
         return;

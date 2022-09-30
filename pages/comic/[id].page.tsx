@@ -84,7 +84,7 @@ const detailCard: NextPage<postProps> = ({ comics }: postProps) => {
                                         antes:${comics.oldPrice}
                                     </Typography>
                                     <Typography variant="body2">
-                                        {comics.price}
+                                        ahora:${comics.price}
                                     </Typography>
                                 </CardContent>
                                 <CardActions>

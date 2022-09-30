@@ -19,21 +19,21 @@ export const initialState: OrderState = {
             title: "",
         },
         register: {
-            nombre: "",
-            apellido: "",
-            email: "",
+            nombre: "pepe",
+            apellido: "diaz",
+            email: "as@gmail.com",
         },
         address: {
-            direccion: "",
-            departamento: "",
-            ciudad: "",
-            provincia: "",
-            codigoPostal: "",
+            direccion: "calle 123",
+            departamento: "bogota",
+            ciudad: "bogota",
+            provincia: "bogota",
+            codigoPostal: "123",
         },
         card: {
-            nroTarjeta: "",
-            nombreTarjeta: "",
-            fechaExp: "",
+            nroTarjeta: "4242 4242 4242 4242",
+            nombreTarjeta: "diaz pepe",
+            fechaExp: "12/22",
             codSeguridad: "",
         },
     },
@@ -41,7 +41,7 @@ export const initialState: OrderState = {
         open: false,
         message: "",
     },
-    finishedOrder: {} as CheckoutInput,
+    orderDetail: {} as CheckoutInput,
 };
 
 export const reducer = (state: OrderState, action: Action) => {
@@ -81,7 +81,7 @@ export const reducer = (state: OrderState, action: Action) => {
         case 'SUBMIT_FORM':
             return {
                 ...state,
-                finishedOrder: {
+                orderDetail: {
                     order: {
                         name: state.order.comic.title,
                         image: state.order.comic.img,

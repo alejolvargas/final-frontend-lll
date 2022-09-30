@@ -6,11 +6,11 @@ import { reducer, initialState, Action } from './reducer';
 export interface OrderState {
     order: Order,
     snackbar: Snackbar,
-    finishedOrder: CheckoutInput,
+    orderDetail: CheckoutInput,
 }
 
 export type OrderContextState = {
-    state: { order: Order, snackbar: Snackbar, finishedOrder: CheckoutInput },
+    state: { order: Order, snackbar: Snackbar, orderDetail: CheckoutInput },
     dispatch: Dispatch<Action>
 }
 

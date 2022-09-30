@@ -10,7 +10,7 @@ import Stack from '@mui/material/Stack';
 import { Address } from 'dh-marvel/features/checkout/checkout.types';
 import useOrder from 'context/useOrden';
 import { submitAddress } from 'context/action';
-
+import Grid from '@mui/material/Grid';
 
 type addressFormProps = {
     title: string,
@@ -53,8 +53,15 @@ const AddressForm: FC<addressFormProps> = ({ title, activeStep, steps, handleNex
                     <ControlledTextInput name="direccion" label="dirección " defaultValue="" />
                     <ControlledTextInput name="departamento" label="departamento " defaultValue="" />
                     <ControlledTextInput name="ciudad" label="ciudad " defaultValue="" />
-                    <ControlledTextInput name="provincia" label="provincia " defaultValue="" />
-                    <ControlledTextInput name="codigoPostal" label="codigo Postal " defaultValue="" />
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} md={8}>
+                            <ControlledTextInput name="provincia" label="provincia " defaultValue="" />
+                        </Grid>
+                        <Grid item xs={12} md={4}>
+                            <ControlledTextInput name="codigoPostal" label="codigo Postal " defaultValue="" />
+                        </Grid>
+
+                    </Grid>
                 </Stack>
                 <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                     <Button
