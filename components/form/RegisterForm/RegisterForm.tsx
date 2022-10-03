@@ -8,12 +8,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { RegisterFormData } from 'dh-marvel/features/checkout/checkout.types';
-import useOrder from 'context/useOrden';
-import { submitRegister } from 'context/action';
+import useOrder from '../../../context/useOrden';
+import { submitRegister } from '../../../context/action';
 
 
 
-type RegisterFormProps = {
+export type RegisterFormProps = {
     title: string,
     activeStep: number,
     steps: string[],
@@ -31,7 +31,7 @@ const RegisterForm: FC<RegisterFormProps> = ({ title, activeStep, steps, handleN
             apellido: apellido,
             email: email,
         }
-    
+
     })
     const { setFocus, handleSubmit } = methods;
 
@@ -45,34 +45,34 @@ const RegisterForm: FC<RegisterFormProps> = ({ title, activeStep, steps, handleN
         setFocus("nombre")
     }, []);
 
-  return ( 
+    return (
 
-     <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(onSubmit)}>
-             <h4>{title}</h4>
-            <Stack>
+        <FormProvider {...methods}>
+            <form onSubmit={handleSubmit(onSubmit)} data-testid="register-container">
+                <h4>{title}</h4>
+                <Stack>
                     <ControlledTextInput name="nombre" label="nombre" />
                     <ControlledTextInput name="apellido" label="apellido" />
                     <ControlledTextInput name="email" label="email@.com" />
-            
-            </Stack> 
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                <Button
-                    color="inherit"
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    sx={{ mr: 1 }}
-                >
-                    Anterior
-                </Button>
-                <Box sx={{ flex: '1 1 auto' }} />
-                <Button type="submit">
-                    {activeStep === steps.length - 1 ? 'Finalizar' : 'Proximo'}
-                </Button>
-            </Box>
-          </form>
-     </FormProvider>
-  )
+
+                </Stack>
+                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                    <Button
+                        color="inherit"
+                        disabled={activeStep === 0}
+                        onClick={handleBack}
+                        sx={{ mr: 1 }}
+                    >
+                        Anterior
+                    </Button>
+                    <Box sx={{ flex: '1 1 auto' }} />
+                    <Button type="submit">
+                        {'Proximo'}
+                    </Button>
+                </Box>
+            </form>
+        </FormProvider>
+    )
 }
 
 export default RegisterForm

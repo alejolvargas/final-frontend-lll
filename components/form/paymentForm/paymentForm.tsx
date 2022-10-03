@@ -9,19 +9,19 @@ import ControlledTextInput from '../imputText/ControlledTextInput';
 import Stack from '@mui/material/Stack';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from 'next/router';
-import useOrder from 'context/useOrden';
-import { setSnackbar, submitCard, submitForm } from 'context/action';
+import useOrder from '../../../context/useOrden';
+import { setSnackbar, submitCard, submitForm } from '../../../context/action';
 
 
-type paymentFormProps = {
+export type PaymentFormProps = {
     title: string,
     activeStep: number,
     steps: string[],
-    handleNext: () => void,
+    handleFinish: (body: CheckoutInput | any) => any,
     handleBack: () => void,
 }
 
-const PaymentForm: FC<paymentFormProps> = ({ title, activeStep, steps, handleNext, handleBack }: paymentFormProps) => {
+const PaymentForm: FC<PaymentFormProps> = ({ title, activeStep, steps, handleFinish, handleBack }: PaymentFormProps) => {
 
     const router = useRouter();
     const { state: { order: { card: { nroTarjeta, nombreTarjeta, fechaExp, codSeguridad } } }, dispatch, state } = useOrder();
@@ -64,43 +64,33 @@ const PaymentForm: FC<paymentFormProps> = ({ title, activeStep, steps, handleNex
                 price: state.order.comic.price,
             }
         }
-       
-        console.log(body)
+
         submitCard(dispatch, data);
         submitForm(dispatch)
-
-       
-
-        const response = await fetch("/api/checkout",{
-            method: "POST",
-            headers: { 'Content-Type': 'application/json', 'Accept-Type': 'application/json', },
-            body: JSON.stringify(body)
-        });
-        const res = await response.json();
-        console.log("POST res: " + JSON.stringify(res));
+        const res = await handleFinish(body)
+    
         if (res.error)
             setSnackbar(dispatch, res.message);
         else
-            router.push("/confirmacion-compra")
+            router.push("/confirmacion-compra") 
     }
-   
 
     useEffect(() => {
         setFocus("nroTarjeta")
     }, [setFocus])
- 
+
     return (
         <FormProvider {...methods} >
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} data-testid="payment-container">
                 <h4>{title}</h4>
                 <Stack >
-                    <ControlledTextInput name="nombreTarjeta" label="Nombre Tarjeta " defaultValue="" />
-                    <ControlledTextInput name="nroTarjeta" label="Numero Tarjeta " defaultValue="" />
+                    <ControlledTextInput name="nombreTarjeta" label="Nombre Tarjeta" defaultValue="" />
+                    <ControlledTextInput name="nroTarjeta" label="Numero Tarjeta" defaultValue="" />
                     <Stack direction="row" spacing={2}>
-                        <ControlledTextInput name="fechaExp" label="Fecha de expiración " defaultValue="" />
-                         <ControlledTextInput name="codSeguridad" label="Codigo de Seguridad " defaultValue="" type="password" />
+                        <ControlledTextInput name="fechaExp" label="Fecha de expiración" defaultValue="" />
+                        <ControlledTextInput name="codSeguridad" label="Codigo de Seguridad" defaultValue="" type="password" />
                     </Stack>
-                   
+
                 </Stack>
                 <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                     <Button
@@ -113,7 +103,7 @@ const PaymentForm: FC<paymentFormProps> = ({ title, activeStep, steps, handleNex
                     </Button>
                     <Box sx={{ flex: '1 1 auto' }} />
                     <Button type="submit">
-                        {activeStep === steps.length - 1 ? 'Finalizar' : 'Proximo'}
+                        {'Finalizar'}
                     </Button>
                 </Box>
             </form>

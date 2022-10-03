@@ -8,11 +8,11 @@ import Button from '@mui/material/Button';
 import ControlledTextInput from '../imputText/ControlledTextInput';
 import Stack from '@mui/material/Stack';
 import { Address } from 'dh-marvel/features/checkout/checkout.types';
-import useOrder from 'context/useOrden';
-import { submitAddress } from 'context/action';
+import useOrder from '../../../context/useOrden';
+import { submitAddress } from '../../../context/action';
 import Grid from '@mui/material/Grid';
 
-type addressFormProps = {
+export type AddressFormProps = {
     title: string,
     activeStep: number,
     steps: string[],
@@ -20,7 +20,7 @@ type addressFormProps = {
     handleBack: () => void,
 }
 
-const AddressForm: FC<addressFormProps> = ({ title, activeStep, steps, handleNext, handleBack }: addressFormProps) => {
+const AddressForm: FC<AddressFormProps> = ({ title, activeStep, steps, handleNext, handleBack }: AddressFormProps) => {
     const { state: { order: { address: { direccion, departamento, ciudad, provincia, codigoPostal } } }, dispatch } = useOrder();
 
     const methods = useForm<Address>({
@@ -47,10 +47,10 @@ const AddressForm: FC<addressFormProps> = ({ title, activeStep, steps, handleNex
 
     return (
         <FormProvider {...methods} >
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} data-testid="address-container">
                 <h4>{title}</h4>
                 <Stack>
-                    <ControlledTextInput name="direccion" label="dirección " defaultValue="" />
+                    <ControlledTextInput name="direccion" label="direccion " defaultValue="" />
                     <ControlledTextInput name="departamento" label="departamento " defaultValue="" />
                     <ControlledTextInput name="ciudad" label="ciudad " defaultValue="" />
                     <Grid container spacing={2}>
@@ -58,7 +58,7 @@ const AddressForm: FC<addressFormProps> = ({ title, activeStep, steps, handleNex
                             <ControlledTextInput name="provincia" label="provincia " defaultValue="" />
                         </Grid>
                         <Grid item xs={12} md={4}>
-                            <ControlledTextInput name="codigoPostal" label="codigo Postal " defaultValue="" />
+                            <ControlledTextInput name="codigoPostal" label="codigo Postal" defaultValue="" />
                         </Grid>
 
                     </Grid>
@@ -74,7 +74,7 @@ const AddressForm: FC<addressFormProps> = ({ title, activeStep, steps, handleNex
                     </Button>
                     <Box sx={{ flex: '1 1 auto' }} />
                     <Button type="submit">
-                        {activeStep === steps.length - 1 ? 'Finalizar' : 'Proximo'}
+                        {'Proximo'}
                     </Button>
                 </Box>
             </form>

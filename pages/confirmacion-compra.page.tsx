@@ -10,7 +10,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router'
-import useOrder from 'context/useOrden'
+import useOrder from '../context/useOrden'
 import { useEffect } from 'react';
 import Head from 'next/head';
 import BodySingle from 'dh-marvel/components/layouts/body/single/body-single';
